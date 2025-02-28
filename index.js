@@ -40,6 +40,11 @@ app.get('/verify', verifyUser, (req, res) => {
     return res.json({ Status: true, role: req.role, id: req.id });
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 3000;  // Use Railway's PORT if available
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+
