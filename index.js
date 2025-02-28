@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors';
 import { adminRouter } from "./Routes/AdminRoute.js";
 import { EmployeeRouter } from "./Routes/EmployeeRoute.js";
-import { NotificationRouter } from "./Routes/notification.js"; // ✅ Import Notifications
+import { NotificationRouter } from "./Routes/notification.js";
 import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use('/auth', adminRouter);
 app.use('/employee', EmployeeRouter);
-app.use('/notifications', NotificationRouter); // ✅ Add Notification Route
+app.use('/notifications', NotificationRouter);
 app.use(express.static('Public'));
 
 const verifyUser = (req, res, next) => {
@@ -40,11 +40,8 @@ app.get('/verify', verifyUser, (req, res) => {
     return res.json({ Status: true, role: req.role, id: req.id });
 });
 
-const express = require('express');
-const app = express();
-
-const PORT = process.env.PORT || 3000;  // Use Railway's PORT if available
+// ✅ This is the correct way to start the server
+const PORT = process.env.PORT || 3000;  // Railway will set process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
